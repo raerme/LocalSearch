@@ -7,11 +7,15 @@ public class PuzzleBoard {
 	
 	
 	
-	public PuzzleBoard() {
-		generatePuzzleBoard(determineSize());
+	public PuzzleBoard(boolean randomSize, int puzzSize) {
+		if (randomSize) generatePuzzleBoard(determineSize());
+		else if (!randomSize) generatePuzzleBoard(puzzSize);
 	}
 	
-	
+	public PuzzleBoard(int puzzSize) {
+		size = puzzSize;
+		generatePuzzleBoard(puzzSize);
+	}
 	
 	private int determineSize() {
 		
