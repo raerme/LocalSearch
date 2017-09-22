@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import model.PuzzleBoard;
 
-public class Test {
+public class PuzzleBoardController {
 	
 	public static void main(String[] args) {
 		
