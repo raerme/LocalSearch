@@ -8,6 +8,20 @@ public class PuzzleBoardController {
 	
 	public static void main(String[] args) {
 		
+		Menu();
+
+	}
+	
+	//This method will control user input and either
+	//1. Create a random puzzle of size 5, 7, 9, or 11 randomly
+	//2. Create a random puzzle of size chosen by user
+	//*3. Read a puzzle from a txt file
+	//*A new method should then display the puzzle and the number of moves
+	//*to solve the puzzle
+	//*Actually all of the above things should be different methods, menu should
+	//*just control these
+	private static void Menu() {
+		
 		boolean done = false;
 		PuzzleBoard puzz = new PuzzleBoard(true, 0);
 	
@@ -17,7 +31,7 @@ public class PuzzleBoardController {
 		
 		while(done == false) {
 			if (str.compareTo("y") == 0) {
-				puzz = new PuzzleBoard(true, 0);
+				puzz = createRandomSizeBoard();
 				done = true;
 			}
 			else if (str.compareTo("n") == 0) {				
@@ -36,8 +50,16 @@ public class PuzzleBoardController {
 		}
 				
 		puzz.displayBoard(puzz);
+		
 	}
 	
+	//Creates random puzzle with size 5, 7, 9, or 11 randomly
+	private static PuzzleBoard createRandomSizeBoard () {
+		PuzzleBoard puzz = new PuzzleBoard(true,0);
+		return puzz;
+	}
 	
-	
+	private static PuzzleBoard createChosenSizeBoard() {
+		PuzzleBoard puzz = new PuzzleBoard()
+	}
 }

@@ -6,7 +6,7 @@ public class PuzzleBoard {
 	private int[][] puzzleBoardArray;
 	
 	
-	
+	//Constructors
 	public PuzzleBoard(boolean randomSize, int puzzSize) {
 		if (randomSize) generatePuzzleBoard(determineSize());
 		else if (!randomSize) generatePuzzleBoard(puzzSize);
@@ -16,7 +16,10 @@ public class PuzzleBoard {
 		size = puzzSize;
 		generatePuzzleBoard(puzzSize);
 	}
+	//^constructors
 	
+	
+	//This method picks a random size for the puzzle (5, 7, 9, or 11)
 	private int determineSize() {
 		
 		double randNum = Math.random();
@@ -29,7 +32,7 @@ public class PuzzleBoard {
 	}
 	
 	
-	
+	//This method is used in generatePuzzleBoard to determine appropriate moves
 	private int determineMoveNumber(int min, int max) {
 				
 		if (min >= max) {
@@ -40,7 +43,7 @@ public class PuzzleBoard {
 	}
 	
 	
-	
+	//This method fills in a 2d array with appropriate move numbers for a given puzzle size
 	public void generatePuzzleBoard(int size){
 		
 		int min = 1;
@@ -61,7 +64,7 @@ public class PuzzleBoard {
 	}
 	
 	
-	
+	//This method will print out the board in cmd
 	public void displayBoard(PuzzleBoard puzzleBoard) {		
 		
 		for(int i = 0; i < puzzleBoardArray.length; i++) {
