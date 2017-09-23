@@ -65,7 +65,7 @@ public class PuzzleBoard {
 	
 	
 	//This method will print out the board in cmd
-	public void displayBoard(PuzzleBoard puzzleBoard) {		
+	public void displayBoard() {		
 		
 		for(int i = 0; i < puzzleBoardArray.length; i++) {
 			for(int j = 0; j < puzzleBoardArray[i].length; j++) {
@@ -76,7 +76,10 @@ public class PuzzleBoard {
 			}
 		}			
 	}
-		
 	
+	
+	public void overwritePuzzleBoard(int[][] newBoardArray) {
+		puzzleBoardArray = newBoardArray;
+	}
 	
 }
