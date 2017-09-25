@@ -128,11 +128,11 @@ public class PuzzleBoardController {
 					firstLineRead = true;
 				}
 				else {
-					System.out.println("reading..");
 					Scanner reader3 = new Scanner(line);
 					while (reader3.hasNext()) {
 						readArray[row][col] = reader3.nextInt();
 						col++;
+						System.out.println("reading..");
 					}
 					row++;
 					col = 0;
