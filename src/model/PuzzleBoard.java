@@ -2,8 +2,8 @@ package model;
 
 public class PuzzleBoard {
 
-	private int size;
-	private int[][] puzzleBoardArray;
+	public int size;
+	public int[][] puzzleBoardArray;
 	
 	
 	//Constructors
@@ -31,7 +31,7 @@ public class PuzzleBoard {
 		return size;
 	}
 	
-	
+		
 	//This method is used in generatePuzzleBoard to determine appropriate moves
 	private int determineMoveNumber(int min, int max) {
 				
@@ -63,6 +63,9 @@ public class PuzzleBoard {
 		puzzleBoardArray[size-1][size-1] = 0; //Goal location
 	}
 	
+	public void setSize(int size) {
+		this.size = size;
+	}
 	
 	//This method will print out the board in cmd
 	public void displayBoard() {		
@@ -79,7 +82,11 @@ public class PuzzleBoard {
 	
 	
 	public void overwritePuzzleBoard(int[][] newBoardArray) {
-		puzzleBoardArray = newBoardArray;
+		for (int i = 0; i < newBoardArray.length; i++) {
+			for(int j = 0; j < newBoardArray[i].length; j++) {
+				puzzleBoardArray[i][j] = newBoardArray[i][j];
+			}
+		}
 	}
 	
 }
