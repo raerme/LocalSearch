@@ -56,7 +56,6 @@ public class PuzzleBoardController {
 			
 			else if (str.compareTo("3") == 0){
 				puzz = createFromTxtBoard();
-				System.out.println(puzz.puzzleBoardArray[0][0]);
 				puzz.displayBoard();
 				done = true;
 			}
@@ -122,7 +121,6 @@ public class PuzzleBoardController {
 			line = br.readLine();
 						
 			while(line != null) {
-				System.out.println(line);
 				//stuff happens here
 				if(firstLineRead == false) {
 					puzzSize = Integer.parseInt(line.substring(0, 1));
@@ -134,7 +132,6 @@ public class PuzzleBoardController {
 					Scanner reader3 = new Scanner(line);
 					while (reader3.hasNext()) {
 						readArray[row][col] = reader3.nextInt();
-						System.out.println(readArray[row][col]);
 						col++;						
 					}
 					row++;
@@ -156,7 +153,6 @@ public class PuzzleBoardController {
 		reader2.close();
 		
 		puzz.overwritePuzzleBoard(readArray);
-		System.out.println(puzz.puzzleBoardArray[0][0]);
 		return puzz;
 	}
 	
