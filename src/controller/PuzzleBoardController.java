@@ -33,8 +33,8 @@ public class PuzzleBoardController {
 			if (str.compareTo("1") == 0) {
 				puzz = createRandomSizeBoard();
 				puzz.displayBoard();
-				BFSDriver bfs = new BFSDriver(puzz);
-				bfs.search();
+				//BFSDriver bfs = new BFSDriver(puzz);
+				//bfs.search();
 				done = true;
 			}
 			
@@ -45,8 +45,8 @@ public class PuzzleBoardController {
 				int puzzSize = Integer.parseInt(str);	
 				puzz = createChosenSizeBoard(puzzSize);		
 				puzz.displayBoard();
-				BFSDriver bfs = new BFSDriver(puzz);
-				bfs.search();
+				//BFSDriver bfs = new BFSDriver(puzz);
+				//bfs.search();
 				done = true;
 			}
 			

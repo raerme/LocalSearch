@@ -37,7 +37,7 @@ public class BFSDriver {
 			int value = node.getValue();
 			
 			while(direction < 5) {
-				System.out.println("test");
+				//System.out.println("test");
 				if(checkMove(puzz, node, direction)) {
 					
 					if(direction == 1) {
