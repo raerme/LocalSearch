@@ -13,16 +13,27 @@ public class PuzzleBoard {
 	public PuzzleBoard(boolean randomSize, int puzzSize) {
 		if (randomSize) generatePuzzleBoard(determineSize());
 		else if (!randomSize) generatePuzzleBoard(puzzSize);
+		solutionArray = new int[puzzSize][puzzSize];
+		movesArray = new int[puzzSize][puzzSize];
+		nonvisited = 0;
+		
+	}
+	
+	public PuzzleBoard(boolean randomSize) {
+		
+		int size = determineSize();
+		if (randomSize) generatePuzzleBoard(size);
 		solutionArray = new int[size][size];
 		movesArray = new int[size][size];
 		nonvisited = 0;
+		
 	}
 	
 	public PuzzleBoard(int puzzSize) {
 		size = puzzSize;
 		generatePuzzleBoard(puzzSize);
-		solutionArray = new int[size][size];
-		movesArray = new int[size][size];
+		solutionArray = new int[puzzSize][puzzSize];
+		movesArray = new int[puzzSize][puzzSize];
 		nonvisited = 0;
 	}
 	//^constructors
@@ -79,11 +90,13 @@ public class PuzzleBoard {
 	}
 	
 	//This method will print out the board in cmd
-	public void displayBoard() {		
+	public void displayBoard() {	
+		
+		System.out.println("\n\nPUZZLE BOARD\n");
 		
 		for(int i = 0; i < puzzleBoardArray.length; i++) {
 			for(int j = 0; j < puzzleBoardArray[i].length; j++) {
-				System.out.print(String.format("%3s", puzzleBoardArray[i][j] + " "));
+				System.out.print(String.format("%4s", puzzleBoardArray[i][j] + " "));
 				if (j == puzzleBoardArray[i].length - 1) {
 					System.out.print("\n");
 				}
@@ -115,7 +128,7 @@ public class PuzzleBoard {
 					System.out.println("X");
 					nonvisited++;
 				}
-				else System.out.print(String.format("%3s", solutionArray[i][j] + " "));
+				else System.out.print(String.format("%4s", solutionArray[i][j] + " "));
 				if (j == solutionArray[i].length - 1) {
 					System.out.print("\n");
 				}
@@ -126,18 +139,25 @@ public class PuzzleBoard {
 	
 	public void displayMovesArray() {
 		
+		System.out.println("\n\nSOLUTION BOARD\n");
+		
 		for(int i = 0; i < movesArray.length; i++) {
 			for(int j = 0; j < movesArray[i].length; j++) {
 				if(movesArray[i][j] == 0) {
-					System.out.println("X");
+					System.out.print(String.format("%4s", "X" + " "));
 					nonvisited++;
 				}
-				else System.out.print(String.format("%3s", movesArray[i][j] + " "));
+				else System.out.print(String.format("%4s", movesArray[i][j] + " "));
 				if (j == solutionArray[i].length - 1) {
 					System.out.print("\n");
 				}
 			}
 		}
+		
+		if(movesArray[movesArray.length-1][movesArray.length-1] == 0) {
+			System.out.println("\n\n SOLUTION VALUE : -" + nonvisited);
+		}
+		else System.out.println("\n\n SOLUTION VALUE : " + movesArray[movesArray.length-1][movesArray.length-1]);
 		
 	}
 	

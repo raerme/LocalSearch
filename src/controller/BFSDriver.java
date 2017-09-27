@@ -19,9 +19,10 @@ public class BFSDriver {
 		st = new SolutionTree();
 		this.puzz = puzz;
 		n.setCoords(0, 0);
-		n.setValue(puzz.puzzleBoardArray[0][0]);
+		n.setValue(this.puzz.puzzleBoardArray[0][0]);
 		st.makeRoot(n);
 		q.enqueue(n);
+		//puzz.solutionArray[0][0]++;
 		numberOfMoves = 0;
 	}
 	
@@ -37,7 +38,7 @@ public class BFSDriver {
 			int value = node.getValue();
 			
 			while(direction < 5) {
-				//System.out.println("test");
+
 				if(checkMove(puzz, node, direction)) {
 					
 					if(direction == 1) {
@@ -94,7 +95,6 @@ public class BFSDriver {
 				search();
 				
 		}
-		puzz.displayMovesArray();
 	}
 	
 	private Node createNode(int row, int col, int value) {

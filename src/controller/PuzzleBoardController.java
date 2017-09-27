@@ -20,7 +20,7 @@ public class PuzzleBoardController {
 	private static void Menu() {
 		
 		boolean done = false;
-		PuzzleBoard puzz = new PuzzleBoard(true, 0);	
+		PuzzleBoard puzz = new PuzzleBoard(false, 5);	
 		Scanner reader = new Scanner(System.in);
 		
 		
@@ -30,11 +30,12 @@ public class PuzzleBoardController {
 		
 		while(done == false) {
 			
-			if (str.compareTo("1") == 0) {
+			if (str.compareTo("1") == 0) {				
 				puzz = createRandomSizeBoard();
 				puzz.displayBoard();
-				//BFSDriver bfs = new BFSDriver(puzz);
-				//bfs.search();
+				BFSDriver bfs = new BFSDriver(puzz);
+				bfs.search();
+				puzz.displayMovesArray();
 				done = true;
 			}
 			
@@ -42,19 +43,21 @@ public class PuzzleBoardController {
 					
 				System.out.println("Integer puzzle size?");
 				str = reader.next();
-				int puzzSize = Integer.parseInt(str);	
+				int puzzSize = Integer.parseInt(str);
 				puzz = createChosenSizeBoard(puzzSize);		
 				puzz.displayBoard();
-				//BFSDriver bfs = new BFSDriver(puzz);
-				//bfs.search();
+				BFSDriver bfs = new BFSDriver(puzz);
+				bfs.search();
+				puzz.displayMovesArray();
 				done = true;
 			}
 			
 			else if (str.compareTo("3") == 0){
 				puzz = createFromTxtBoard();
 				puzz.displayBoard();
-				//BFSDriver bfs = new BFSDriver(puzz);
-				//bfs.search();
+				BFSDriver bfs = new BFSDriver(puzz);
+				bfs.search();
+				puzz.displayMovesArray();
 				done = true;
 			}
 			
@@ -86,14 +89,14 @@ public class PuzzleBoardController {
 	
 	//Creates random puzzle with size 5, 7, 9, or 11 randomly
 	private static PuzzleBoard createRandomSizeBoard () {		
-		PuzzleBoard puzz = new PuzzleBoard(true,0);			
+		PuzzleBoard puzz = new PuzzleBoard(true);			
 		return puzz;
 	}
 	
 	
 	//Creates a random puzzle of size chosen by user
 	private static PuzzleBoard createChosenSizeBoard(int size) {
-		PuzzleBoard puzz = new PuzzleBoard(false, size);
+		PuzzleBoard puzz = new PuzzleBoard(size);
 		return puzz;
 	}
 	
@@ -123,7 +126,8 @@ public class PuzzleBoardController {
 				if(firstLineRead == false) {
 					puzzSize = Integer.parseInt(line.substring(0, 1));
 					readArray = new int[puzzSize][puzzSize];
-					puzz = new PuzzleBoard(false,puzzSize);					
+					puzz = new PuzzleBoard(false,puzzSize);	
+					puzz.setSize(puzzSize);
 					firstLineRead = true;
 				}
 				else {
