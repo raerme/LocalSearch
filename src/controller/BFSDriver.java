@@ -12,6 +12,8 @@ public class BFSDriver {
 	PuzzleBoard puzz;
 	SolutionTree st;
 	int numberOfMoves;
+	int wave;
+	boolean theSwitch;
 	
 	public BFSDriver(PuzzleBoard puzz) {
 		q = new Queue();
@@ -22,76 +24,95 @@ public class BFSDriver {
 		n.setValue(this.puzz.puzzleBoardArray[0][0]);
 		st.makeRoot(n);
 		q.enqueue(n);
-		//puzz.solutionArray[0][0]++;
+		puzz.solutionArray[0][0]++;
 		numberOfMoves = 0;
+		wave = 0;
+		theSwitch = true;
+		puzz.waveArray[0][0] = 0;
 	}
 	
 	public void search() {
-		
 		int direction = 1;
 		
+		
 		if(!q.isEmpty()) {
-			Node node = q.dequeue();
-
-			int row = node.getRow();
-			int col = node.getCol();
-			int value = node.getValue();
 			
-			while(direction < 5) {
-
-				if(checkMove(puzz, node, direction)) {
-					
-					if(direction == 1) {
-						if(puzz.solutionArray[row][col+value] == 0) {
-							
-							puzz.solutionArray[row][col+value]++;
-							st.add(node);
-							numberOfMoves++;
-							puzz.movesArray[row][col+value] = numberOfMoves;
-							Node newNode = createNode(row, col+value, puzz.puzzleBoardArray[row][col+value]);
-							q.enqueue(newNode);
-						}
-					}
-					else if(direction == 2) {
-						if(puzz.solutionArray[row+value][col] == 0) {
-							
-							puzz.solutionArray[row+value][col]++;
-							st.add(node);
-							numberOfMoves++;
-							puzz.movesArray[row+value][col] = numberOfMoves;
-							Node newNode = createNode(row+value, col, puzz.puzzleBoardArray[row+value][col]);
-							q.enqueue(newNode);
-						}
-					}
-					else if(direction == 3) {
-						if(puzz.solutionArray[row][col-value] == 0) {
-							
-							puzz.solutionArray[row][col-value]++;
-							st.add(node);
-							numberOfMoves++;
-							puzz.movesArray[row][col-value] = numberOfMoves;
-							Node newNode = createNode(row, col-value, puzz.puzzleBoardArray[row][col-value]);
-							q.enqueue(newNode);
-						}
-					}
-					else if(direction == 4) {
-						if(puzz.solutionArray[row-value][col] == 0) {
-							
-							puzz.solutionArray[row-value][col]++;
-							st.add(node);
-							numberOfMoves++;
-							puzz.movesArray[row-value][col] = numberOfMoves;
-							Node newNode = createNode(row-value, col, puzz.puzzleBoardArray[row-value][col]);
-							q.enqueue(newNode);
-						}
-					}
-					
-					
-				}
+			if(q.peek().getValue() != -1) {
+				Node node = q.dequeue();
 				
-				direction++;
+				int row = node.getRow();
+				int col = node.getCol();
+				int value = node.getValue();
+				
+				puzz.waveArray[row][col] = wave;
+				
+				if(theSwitch) {
+					Node nullNode = new Node();
+					nullNode.setValue(-1);
+					q.enqueue(nullNode);
+					theSwitch = false;
+				}
+					
+				while(direction < 5) {
+	
+					if(checkMove(puzz, node, direction)) {
+						
+						if(direction == 1) {
+							if(puzz.solutionArray[row][col+value] == 0) {
+								
+								puzz.solutionArray[row][col+value]++;
+								st.add(node);
+								numberOfMoves++;
+								puzz.movesArray[row][col+value] = numberOfMoves;							
+								Node newNode = createNode(row, col+value, puzz.puzzleBoardArray[row][col+value]);
+								q.enqueue(newNode);
+							}
+						}
+						else if(direction == 2) {
+							if(puzz.solutionArray[row+value][col] == 0) {
+								
+								puzz.solutionArray[row+value][col]++;
+								st.add(node);
+								numberOfMoves++;
+								puzz.movesArray[row+value][col] = numberOfMoves;
+								Node newNode = createNode(row+value, col, puzz.puzzleBoardArray[row+value][col]);
+								q.enqueue(newNode);
+							}
+						}
+						else if(direction == 3) {
+							if(puzz.solutionArray[row][col-value] == 0) {
+								
+								puzz.solutionArray[row][col-value]++;
+								st.add(node);
+								numberOfMoves++;
+								puzz.movesArray[row][col-value] = numberOfMoves;
+								Node newNode = createNode(row, col-value, puzz.puzzleBoardArray[row][col-value]);
+								q.enqueue(newNode);
+							}
+						}
+						else if(direction == 4) {
+							if(puzz.solutionArray[row-value][col] == 0) {
+								
+								puzz.solutionArray[row-value][col]++;
+								st.add(node);
+								numberOfMoves++;
+								puzz.movesArray[row-value][col] = numberOfMoves;
+								Node newNode = createNode(row-value, col, puzz.puzzleBoardArray[row-value][col]);
+								q.enqueue(newNode);
+							}
+						}
+						
+						
+					}
+					
+					direction++;
+				}
 			}
-			
+			else {
+				q.dequeue();
+				wave++;
+				theSwitch = true;
+			}
 				search();
 				
 		}

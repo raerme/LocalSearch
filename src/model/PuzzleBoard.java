@@ -6,6 +6,7 @@ public class PuzzleBoard {
 	public int[][] puzzleBoardArray;
 	public int[][] solutionArray;
 	public int[][] movesArray;
+	public int[][] waveArray;
 	int nonvisited;
 	
 	
@@ -15,6 +16,7 @@ public class PuzzleBoard {
 		else if (!randomSize) generatePuzzleBoard(puzzSize);
 		solutionArray = new int[puzzSize][puzzSize];
 		movesArray = new int[puzzSize][puzzSize];
+		waveArray = new int[puzzSize][puzzSize];
 		nonvisited = 0;
 		
 	}
@@ -25,6 +27,7 @@ public class PuzzleBoard {
 		if (randomSize) generatePuzzleBoard(size);
 		solutionArray = new int[size][size];
 		movesArray = new int[size][size];
+		waveArray = new int[size][size];
 		nonvisited = 0;
 		
 	}
@@ -34,6 +37,7 @@ public class PuzzleBoard {
 		generatePuzzleBoard(puzzSize);
 		solutionArray = new int[puzzSize][puzzSize];
 		movesArray = new int[puzzSize][puzzSize];
+		waveArray = new int[puzzSize][puzzSize];
 		nonvisited = 0;
 	}
 	//^constructors
@@ -158,6 +162,33 @@ public class PuzzleBoard {
 			System.out.println("\n\n SOLUTION VALUE : -" + nonvisited);
 		}
 		else System.out.println("\n\n SOLUTION VALUE : " + movesArray[movesArray.length-1][movesArray.length-1]);
+		
+	}
+	
+	public void displayWaveArray() {
+
+		System.out.println("\n\nSOLUTION BOARD\n");
+		
+		for(int i = 0; i < waveArray.length; i++) {
+			for(int j = 0; j < waveArray[i].length; j++) {
+				if(i == 0 && j == 0) {
+					System.out.print(String.format("%4s", "0" + " "));
+				}
+				else if(waveArray[i][j] == 0) {
+					System.out.print(String.format("%4s", "X" + " "));
+					nonvisited++;
+				}
+				else System.out.print(String.format("%4s", waveArray[i][j] + " "));
+				if (j == solutionArray[i].length - 1) {
+					System.out.print("\n");
+				}
+			}
+		}
+		
+		if(waveArray[waveArray.length-1][waveArray.length-1] == 0) {
+			System.out.println("\n\n SOLUTION VALUE : -" + nonvisited);
+		}
+		else System.out.println("\n\n SOLUTION VALUE : " + waveArray[waveArray.length-1][waveArray.length-1]);
 		
 	}
 	

@@ -35,6 +35,17 @@ public class Queue {
 			return retnode;
 		}
 	}
+	
+	public Node peek() {
+		Node peeknode = null;
+		if (first == null) {
+			throw new NoSuchElementException();
+		}
+		else {
+			peeknode = first;
+			return peeknode;
+		}
+	}
 
 	public boolean isEmpty() {
 		if(first == null) return true;

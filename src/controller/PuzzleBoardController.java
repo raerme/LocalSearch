@@ -35,7 +35,7 @@ public class PuzzleBoardController {
 				puzz.displayBoard();
 				BFSDriver bfs = new BFSDriver(puzz);
 				bfs.search();
-				puzz.displayMovesArray();
+				puzz.displayWaveArray();
 				done = true;
 			}
 			
@@ -48,7 +48,7 @@ public class PuzzleBoardController {
 				puzz.displayBoard();
 				BFSDriver bfs = new BFSDriver(puzz);
 				bfs.search();
-				puzz.displayMovesArray();
+				puzz.displayWaveArray();
 				done = true;
 			}
 			
@@ -57,7 +57,7 @@ public class PuzzleBoardController {
 				puzz.displayBoard();
 				BFSDriver bfs = new BFSDriver(puzz);
 				bfs.search();
-				puzz.displayMovesArray();
+				puzz.displayWaveArray();
 				done = true;
 			}
 			
