@@ -83,4 +83,45 @@ public class SolutionTree {
 		return nextParent;
 	}
 	
+	public int check() {
+		if(left == null && right == null) {
+			return 1;
+		}
+		else if (left == null) {
+			return 1 + right.check();
+		}
+		else if (right == null) {
+			return 1 + left.check();
+		}
+		else {
+			return 1 + left.check() + right.check();
+		}
+	}
+	
+	public void add(Node n) {
+		if(this.isEmpty()) {
+			this.makeRoot(n);
+		}
+		else if(this.left == null) {
+			SolutionTree st = new SolutionTree();
+			st.data = n;
+			st.parent = this;
+			this.left = st;
+		}
+		else if(this.right == null) {
+			SolutionTree st = new SolutionTree();
+			st.data = n;
+			st.parent = this;
+			this.right = st;
+		}
+		else {
+			if(left.check() <= right.check()) {
+				left.add(n);
+			}
+			else {
+				right.add(n);
+			}
+		}
+	}
+	
 }

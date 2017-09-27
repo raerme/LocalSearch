@@ -4,17 +4,26 @@ public class PuzzleBoard {
 
 	public int size;
 	public int[][] puzzleBoardArray;
+	public int[][] solutionArray;
+	public int[][] movesArray;
+	int nonvisited;
 	
 	
 	//Constructors
 	public PuzzleBoard(boolean randomSize, int puzzSize) {
 		if (randomSize) generatePuzzleBoard(determineSize());
 		else if (!randomSize) generatePuzzleBoard(puzzSize);
+		solutionArray = new int[size][size];
+		movesArray = new int[size][size];
+		nonvisited = 0;
 	}
 	
 	public PuzzleBoard(int puzzSize) {
 		size = puzzSize;
 		generatePuzzleBoard(puzzSize);
+		solutionArray = new int[size][size];
+		movesArray = new int[size][size];
+		nonvisited = 0;
 	}
 	//^constructors
 	
@@ -60,7 +69,9 @@ public class PuzzleBoard {
 				puzzleBoardArray[i][j] = determineMoveNumber(min,max);
 			}
 		}
-		puzzleBoardArray[size-1][size-1] = 0; //Goal location
+		if(size != 0) {
+			puzzleBoardArray[size-1][size-1] = 0; //Goal location
+		}	
 	}
 	
 	public void setSize(int size) {
@@ -87,6 +98,47 @@ public class PuzzleBoard {
 				puzzleBoardArray[i][j] = newBoardArray[i][j];
 			}
 		}
+		solutionArray = new int[newBoardArray.length][newBoardArray.length];
+	}
+	
+	//vvv stuff for solutionarray
+	
+	public void addVisit(int row, int col) {
+		solutionArray[row][col]++;
+	}
+	
+	public void displaySolutionArray() {
+		
+		for(int i = 0; i < solutionArray.length; i++) {
+			for(int j = 0; j < solutionArray[i].length; j++) {
+				if(solutionArray[i][j] == 0) {
+					System.out.println("X");
+					nonvisited++;
+				}
+				else System.out.print(String.format("%3s", solutionArray[i][j] + " "));
+				if (j == solutionArray[i].length - 1) {
+					System.out.print("\n");
+				}
+			}
+		}
+		
+	}
+	
+	public void displayMovesArray() {
+		
+		for(int i = 0; i < movesArray.length; i++) {
+			for(int j = 0; j < movesArray[i].length; j++) {
+				if(movesArray[i][j] == 0) {
+					System.out.println("X");
+					nonvisited++;
+				}
+				else System.out.print(String.format("%3s", movesArray[i][j] + " "));
+				if (j == solutionArray[i].length - 1) {
+					System.out.print("\n");
+				}
+			}
+		}
+		
 	}
 	
 }

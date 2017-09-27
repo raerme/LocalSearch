@@ -17,14 +17,6 @@ public class PuzzleBoardController {
 
 	}
 	
-	//This method will control user input and either
-	//1. Create a random puzzle of size 5, 7, 9, or 11 randomly
-	//2. Create a random puzzle of size chosen by user
-	//*3. Read a puzzle from a txt file
-	//*A new method should then display the puzzle and the number of moves
-	//*to solve the puzzle
-	//*Actually all of the above things should be different methods, menu should
-	//*just control these
 	private static void Menu() {
 		
 		boolean done = false;
@@ -41,6 +33,8 @@ public class PuzzleBoardController {
 			if (str.compareTo("1") == 0) {
 				puzz = createRandomSizeBoard();
 				puzz.displayBoard();
+				BFSDriver bfs = new BFSDriver(puzz);
+				bfs.search();
 				done = true;
 			}
 			
@@ -51,12 +45,16 @@ public class PuzzleBoardController {
 				int puzzSize = Integer.parseInt(str);	
 				puzz = createChosenSizeBoard(puzzSize);		
 				puzz.displayBoard();
+				BFSDriver bfs = new BFSDriver(puzz);
+				bfs.search();
 				done = true;
 			}
 			
 			else if (str.compareTo("3") == 0){
 				puzz = createFromTxtBoard();
 				puzz.displayBoard();
+				//BFSDriver bfs = new BFSDriver(puzz);
+				//bfs.search();
 				done = true;
 			}
 			
@@ -102,7 +100,7 @@ public class PuzzleBoardController {
 	
 	//Creates a puzzle from a corresponding txt file
 	private static PuzzleBoard createFromTxtBoard() {
-		PuzzleBoard puzz = new PuzzleBoard(true,0);
+		PuzzleBoard puzz = new PuzzleBoard(false,5);
 		int puzzSize = 0;
 		int row = 0;
 		int col = 0;
@@ -125,7 +123,7 @@ public class PuzzleBoardController {
 				if(firstLineRead == false) {
 					puzzSize = Integer.parseInt(line.substring(0, 1));
 					readArray = new int[puzzSize][puzzSize];
-					puzz.setSize(puzzSize);
+					puzz = new PuzzleBoard(false,puzzSize);					
 					firstLineRead = true;
 				}
 				else {
