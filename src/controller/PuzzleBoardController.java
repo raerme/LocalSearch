@@ -124,11 +124,13 @@ public class PuzzleBoardController {
 			while(line != null) {
 				//stuff happens here
 				if(firstLineRead == false) {
-					puzzSize = Integer.parseInt(line.substring(0, 1));
+					Scanner sizeReader = new Scanner(line);
+					puzzSize = Integer.parseInt(sizeReader.next());
 					readArray = new int[puzzSize][puzzSize];
 					puzz = new PuzzleBoard(false,puzzSize);	
 					puzz.setSize(puzzSize);
 					firstLineRead = true;
+					sizeReader.close();
 				}
 				else {
 					Scanner reader3 = new Scanner(line);
